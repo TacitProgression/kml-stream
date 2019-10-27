@@ -17,7 +17,7 @@ function KmlStream() {
   this.schemata = {};
   this.setEvents();
   this.geom = null;
-  this.props = null;
+  this.props = {};
   this.exData = null;
   this.field = null;
   this.geoMode = null;
@@ -151,7 +151,7 @@ KmlStream.prototype.setEvents = function () {
   };
   this.parser.ontext = function (data) {
     var thing;
-    if (!data.trim() || !this.tag) {
+    if (!data.trim() || !this.tag || !this.tag.name) {
       return;
     }
     switch(this.tag.name) {
