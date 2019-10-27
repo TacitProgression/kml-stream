@@ -151,7 +151,7 @@ KmlStream.prototype.setEvents = function () {
   };
   this.parser.ontext = function (data) {
     var thing;
-    if (!data.trim()) {
+    if (!data.trim() || !this.tag) {
       return;
     }
     switch(this.tag.name) {
@@ -186,6 +186,11 @@ KmlStream.prototype.setEvents = function () {
             self.geom.coordinates.push(thing);
           }
         }
+        return;
+      default:
+        // also add other props
+        self.props[this.tag.name] = data
+        return;
     }
   };
   function parseCord(data) {
