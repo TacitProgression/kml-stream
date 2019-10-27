@@ -188,6 +188,10 @@ KmlStream.prototype.setEvents = function () {
         }
         return;
       default:
+        if (!self.props) {
+          self.props = {};
+        }
+
         // also add other props
         self.props[this.tag.name] = (typeof data === 'string') ? data.trim() : data;
         return;
